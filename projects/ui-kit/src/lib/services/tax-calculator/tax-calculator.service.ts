@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Injectable, InjectionToken, inject } from '@angular/core';
 
 export interface Countries {
   [key: string]: {
@@ -7,7 +7,7 @@ export interface Countries {
   };
 }
 
-export const COUNTRIES = new InjectionToken(
+export const COUNTRIES = new InjectionToken<Countries>(
   'countries',
   {
     providedIn: 'root',
@@ -25,9 +25,7 @@ export const COUNTRIES = new InjectionToken(
   providedIn: 'root',
 })
 export class TaxCalculatorService {
-  constructor(
-    @Inject(COUNTRIES) readonly countries: Countries
-  ) {}
+  countries = inject(COUNTRIES);
   
   /**
    * Expectation 1: It throws error if country isn't supported
