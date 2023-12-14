@@ -1,23 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 
-export interface Country {
+export interface Countries {
   [key: string]: {
     name: string;
     vat: number;
   };
 }
 
+export const COUNTRIES = new InjectionToken(
+  'countries',
+  {
+    providedIn: 'root',
+    factory: () => Object.freeze({
+      ua: { name: 'Ukraine', vat: 20 },
+      at: { name: 'Austria', vat: 20 },
+      de: { name: 'Germany', vat: 19 },
+      uk: { name: 'United Kingdom', vat: 20 },
+      ge: { name: 'Georgia', vat: 18 },
+    })
+  }
+)
+
 @Injectable({
   providedIn: 'root',
 })
 export class TaxCalculatorService {
-  readonly countries: Country = Object.freeze({
-    ua: { name: 'Ukraine', vat: 20 },
-    at: { name: 'Austria', vat: 20 },
-    de: { name: 'Germany', vat: 19 },
-    uk: { name: 'United Kingdom', vat: 20 },
-    ge: { name: 'Georgia', vat: 18 },
-  });
+  constructor(
+    @Inject(COUNTRIES) readonly countries: Countries
+  ) {}
   
   /**
    * Expectation 1: It throws error if country isn't supported

@@ -1,9 +1,11 @@
-import { TaxCalculatorService } from "./tax-calculator.service"
+import { TaxCalculatorService, Countries } from "./tax-calculator.service"
 
 describe(`TaxCalculatorService`, () => {
   let service: TaxCalculatorService;
+  let testCountries: Countries;
   beforeEach(() => {
-    service = new TaxCalculatorService()    
+    testCountries = { ua: { name: 'Ukraine', vat: 20 } };
+    service = new TaxCalculatorService(testCountries)
   })
   it(`should return 0 if isB2B flag is true`, () => {
     const result = service.calculateVAT(100, 'ua', true);
@@ -15,7 +17,7 @@ describe(`TaxCalculatorService`, () => {
   })
   describe(`TaxCalculatorSevice: Error Handling`, () => {
     it(`should throw error if country isn't supported`, () => {
-      expect(() => service.calculateVAT(100, 'ru'))
+      expect(() => service.calculateVAT(100, 'ir'))
         .toThrowError(/isn't supported/)
     })
     it(`should throw error if price is negative number`, () => {
