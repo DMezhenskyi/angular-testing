@@ -26,7 +26,7 @@
     background-color: var(--df-color-surface, white);
     border-color: var(--df-color-primary, #1098c8);
     color: var(--df-color-primary, #1098c8);
-    .loader {
+    .button-loader {
       border-color: var(--df-color-primary, #1098c8);
       border-bottom-color: transparent;
     }
@@ -36,7 +36,7 @@
     opacity: 0.6;
   }
 }
-.loader {
+.button-loader {
   width: 16px;
   height: 16px;
   border: 2px solid var(--df-color-primary, #1098c8);

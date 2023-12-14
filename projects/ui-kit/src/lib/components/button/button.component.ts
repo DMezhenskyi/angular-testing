@@ -9,7 +9,7 @@ import { HasTabIndexDirective } from '../../directives/has-tab-index/has-tab-ind
     <span class="button-label">
       <ng-content></ng-content>
     </span>
-    <span *ngIf="loading" class="loader"></span>
+    <span *ngIf="loading" data-testingId="loader" class="button-loader"></span>
   `,
   styleUrls: ['./button.component.scss'],
   hostDirectives: [
