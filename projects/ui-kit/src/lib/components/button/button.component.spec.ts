@@ -32,6 +32,15 @@ describe('ButtonComponent', () => {
       expect(el.classList).toContain('solid-button');
     })
   })
+  it('should prevent default behavior', () => {
+    fixture.componentRef.setInput('disabled', true);
+    fixture.detectChanges();
+    const clickEvent = new PointerEvent('click', {
+      cancelable: true
+    })
+    debugEl.triggerEventHandler('click', clickEvent);
+    expect(clickEvent.defaultPrevented).toBe(true);
+  })
   describe('Loading state', () => {
     it('should show loader icon in "loading" state', () => {
       fixture.componentRef.setInput('loading', true)
